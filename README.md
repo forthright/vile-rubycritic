@@ -1,4 +1,4 @@
-# vile-rubycritic
+# vile-rubycritic [![Circle CI](https://circleci.com/gh/brentlintner/vile-rubycritic.svg?style=svg&circle-token=61a8841f037b8768d87856aef807feb441557a58)](https://circleci.com/gh/brentlintner/vile-rubycritic)
 
 A [vile](http://github.com/brentlintner/vile) plugin for
 [rubycritic](https://github.com/whitesmith/rubycritic).
