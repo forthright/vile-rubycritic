@@ -54,6 +54,16 @@ rubycritic:
     paths: [ "app", "lib" ]
 ```
 
+## Vile Types Generated
+
+Since RubyCritic is awesome, it allows this plugin to generate a lot
+of details and generates:
+
+* `vile.DUPE`
+* `vile.CHURN`
+* `vile.COMP`
+* `vile.MAIN`
+
 ## Architecture
 
 This project is currently written in JavaScript. RubyCritic provides
