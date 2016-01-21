@@ -23,7 +23,10 @@ Note: A good strategy is to use [bundler](http://bundler.io).
 
 ## Config
 
-Supported thresholds are applied per file.
+`vile.MAIN` issues are generated if the below thresholds
+are hit. `vile.CHURN` and `vile.COMP` are automatically
+created if values are provided, as `vile.io` will notify
+if you have high churn/complexity.
 
 Example:
 
@@ -31,8 +34,6 @@ Example:
 rubycritic:
   config:
     method_count: 10
-    complexity: 80
-    churn: 20
     rating: "A"
 ```
 
@@ -41,20 +42,17 @@ if not run within such a context.
 
 ## Ignoring Files
 
-If you have a `.rubycriticignore` file in your root, and you have
-this in your `.vile.yml`:
+Since `rubycritic` honours your `.reek` configuration, you should be able
+to use that to ignore files.
+
+However, it appears that ignoring files is not wholistically supported
+and/or buggy, so a solution for now is to specify whitelist paths:
 
 ```yml
 rubycritic:
-  ignore: .rcignore
+  config:
+    paths: [ "app", "lib" ]
 ```
-
-### .rcignore
-
-This is a file specific to `vile-rubycritic` itself.
-
-It is more or less like a `.gitignore` file, and uses
-[ignore-file](https://github.com/mafintosh/ignore-file) for matching.
 
 ## Architecture
 

@@ -1,17 +1,54 @@
 mimus = require "mimus"
-newline = require "./../lib"
+rubycritic = mimus.require "./../lib", __dirname, []
 chai = require "./helpers/sinon_chai"
+util = require "./helpers/util"
+vile = mimus.get rubycritic, "vile"
 expect = chai.expect
 
-describe "finding newlines", ->
-  afterEach newline.reset
-  after newline.restore
+# TODO: write integration tests for spawn -> cli
+# TODO: don't use setTimeout everywhere (for proper exception throwing)
 
-  describe "with lf", ->
+describe "rubycritic", ->
+  afterEach mimus.reset
+  after mimus.restore
+  beforeEach ->
+    mimus.stub vile, "spawn"
+    util.setup vile
 
-  describe "with crlf", ->
+  describe "#punish", ->
+    it "converts rubycritic json to issues", ->
+      rubycritic
+        .punish { config: rating: "A" }
+        .should.eventually.eql util.issues
 
-  describe "with whitespace", ->
-    describe "crlf", ->
+    it "handles an empty response", ->
+      vile.spawn.reset()
+      vile.spawn.returns new Promise (resolve) -> resolve ""
 
-    describe "lf", ->
+      rubycritic
+        .punish {}
+        .should.eventually.eql []
+
+    it "calls rubycritic in the cwd", (done) ->
+      rubycritic
+        .punish {}
+        .should.be.fulfilled.notify ->
+          setTimeout ->
+            vile.spawn.should.have.been
+              .calledWith "rubycritic", args: [ "-f", "json", "." ]
+            done()
+
+    describe "with custom config paths", ->
+      it "passes the paths to the rubycritic cli", (done) ->
+        rubycritic
+          .punish config: paths: ["a", "b"]
+          .should.be.fulfilled.notify ->
+            setTimeout ->
+              vile.spawn.should.have.been
+                .calledWith "rubycritic", args: [
+                              "-f"
+                              "json"
+                              "a"
+                              "b"
+                            ]
+              done()
