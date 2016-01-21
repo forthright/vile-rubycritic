@@ -33,7 +33,6 @@ Example:
 ```yml
 rubycritic:
   config:
-    method_count: 10
     rating: "A"
 ```
 
