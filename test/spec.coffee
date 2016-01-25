@@ -8,6 +8,8 @@ expect = chai.expect
 # TODO: write integration tests for spawn -> cli
 # TODO: don't use setTimeout everywhere (for proper exception throwing)
 
+# TODO: write system level test for rubycritic bad json output
+
 describe "rubycritic", ->
   afterEach mimus.reset
   after mimus.restore

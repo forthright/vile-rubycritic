@@ -3,7 +3,12 @@ let vile = require("@brentlintner/vile")
 
 // TODO: log this as a warning if matched
 const BEFORE_JSON = /^[^\{]*/gi
+const AFTER_JSON = /[^\}]*$/gi
 const DEFAULT_RATING_LIMIT = "A"
+
+let santize_invalid_json_output = (stdout) =>
+  stdout.replace(BEFORE_JSON, "")
+        .replace(AFTER_JSON, "")
 
 let rubycritic = (config) =>
   vile
@@ -12,7 +17,7 @@ let rubycritic = (config) =>
     })
 		// HACK
     .then((stdout) => stdout ?
-			JSON.parse(stdout.replace(BEFORE_JSON, "")) :
+			JSON.parse(santize_invalid_json_output(stdout)) :
 				{ analysed_modules: [] })
 
 let smell_type = (smell) =>
