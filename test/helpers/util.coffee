@@ -50,16 +50,18 @@ issues = [
     type: "duplicate",
     title: "Similar code",
     message: "found in 2 nodes",
-    locations: [
-      {
-        path: "spec/models/auth_token_spec.rb",
-        where: start: { line: 59 }
-      }
-      {
-        path: "spec/models/circle_ci_integration_spec.rb",
-        where: start: { line: 10 }
-      }
-    ],
+    duplicate: {
+      locations: [
+        {
+          path: "spec/models/auth_token_spec.rb",
+          where: start: { line: 59 }
+        }
+        {
+          path: "spec/models/circle_ci_integration_spec.rb",
+          where: start: { line: 10 }
+        }
+      ],
+    }
     signature: "rubycritic::DuplicateCode::" +
                 "spec/models/auth_token_spec.rb," +
                 "spec/models/circle_ci_integration_spec.rb"

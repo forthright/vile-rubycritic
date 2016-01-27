@@ -36,12 +36,14 @@ let vile_issues = (issue, config) => {
 				title: smell.context,
 				message: smell.message,
 				signature: `rubycritic::${smell.type}::${files.join(",")}`,
-				locations: _.map(smell.locations, (loc) => {
-					return {
-						path: loc.path,
-						where: { start: { line: loc.line } }
-					}
-				})
+        duplicate: {
+          locations: _.map(smell.locations, (loc) => {
+            return {
+              path: loc.path,
+              where: { start: { line: loc.line } }
+            }
+          })
+        }
 			})
 		} else {
 			// HACK: just use first location for now for MAIN issues
