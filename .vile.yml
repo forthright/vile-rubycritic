@@ -3,9 +3,15 @@ vile:
       "node_modules",
       ".build",
       ".test",
+      ".git",
       "coverage",
+      "tmp",
       "lib"
     ]
+
+coverage:
+  config:
+    path: coverage/lcov.info
 
 length:
   config:

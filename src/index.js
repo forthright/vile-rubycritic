@@ -1,5 +1,5 @@
 let _ = require("lodash")
-let vile = require("@brentlintner/vile")
+let vile = require("@forthright/vile")
 
 // TODO: log this as a warning if matched
 const BEFORE_JSON = /^[^\{]*/gi
