@@ -1,5 +1,7 @@
 # vile-rubycritic [![Circle CI](https://circleci.com/gh/brentlintner/vile-rubycritic.svg?style=svg&circle-token=61a8841f037b8768d87856aef807feb441557a58)](https://circleci.com/gh/brentlintner/vile-rubycritic)
 
+[![score-badge](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic/badges/score?token=kEBof4SJ2tpGJXJ86jgx)](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic) [![security-badge](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic/badges/security?token=kEBof4SJ2tpGJXJ86jgx)](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic) [![coverage-badge](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic/badges/coverage?token=kEBof4SJ2tpGJXJ86jgx)](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic) [![dependency-badge](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic/badges/dependency?token=kEBof4SJ2tpGJXJ86jgx)](http://joffrey-baratheon.herokuapp.com/brentlintner/vile-rubycritic)
+
 A [vile](http://github.com/brentlintner/vile) plugin for
 [rubycritic](https://github.com/whitesmith/rubycritic).
 
