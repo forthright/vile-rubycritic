@@ -10,10 +10,10 @@ let santize_invalid_json_output = (stdout) =>
   stdout.replace(BEFORE_JSON, "")
         .replace(AFTER_JSON, "")
 
-let rubycritic = (config) =>
+let rubycritic = (paths) =>
   vile
     .spawn("rubycritic", {
-      args: ["-f", "json"].concat(_.get(config, "paths", ["."]))
+      args: ["-f", "json"].concat(paths)
     })
 		// HACK
     .then((stdout) => stdout ?
@@ -92,14 +92,19 @@ let vile_issues = (issue, config) => {
   return issues
 }
 
-let punish = (plugin_data) =>
-  rubycritic(_.get(plugin_data, "config", {}))
+let punish = (plugin_data) => {
+  let config = _.get(plugin_data, "config", {})
+  let allow = _.get(plugin_data, "allow", [])
+  let paths = _.isEmpty(allow) ? ["."] : allow
+
+  return rubycritic(paths)
     .then((cli_json) => {
 			let files = _.get(cli_json, "analysed_modules", [])
 			return _.flatten(files.map((issue) =>
-				vile_issues(issue, _.get(plugin_data, "config", {}))
+				vile_issues(issue, config)
 			))
 		})
+}
 
 module.exports = {
   punish: punish

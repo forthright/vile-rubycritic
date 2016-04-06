@@ -40,10 +40,25 @@ describe "rubycritic", ->
               .calledWith "rubycritic", args: [ "-f", "json", "." ]
             done()
 
-    describe "with custom config paths", ->
-      it "passes the paths to the rubycritic cli", (done) ->
+    describe "with allow set", ->
+      it "passes the allow list to the rubycritic cli", (done) ->
         rubycritic
-          .punish config: paths: ["a", "b"]
+          .punish allow: ["a", "b"]
+          .should.be.fulfilled.notify ->
+            setTimeout ->
+              vile.spawn.should.have.been
+                .calledWith "rubycritic", args: [
+                              "-f"
+                              "json"
+                              "a"
+                              "b"
+                            ]
+              done()
+
+    describe "with ignore set", ->
+      it "passes the allow list to the rubycritic cli", (done) ->
+        rubycritic
+          .punish allow: ["a", "b"]
           .should.be.fulfilled.notify ->
             setTimeout ->
               vile.spawn.should.have.been
