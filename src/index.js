@@ -78,7 +78,7 @@ let vile_issues = (issue, config) => {
     }))
   }
 
-  if (_.has(issue, "rating") &&
+  if (_.has(issue, "rating") && _.has(config, "rating") &&
       issue.rating.toLowerCase() > config.rating.toLowerCase()) {
     issues.push(vile.issue({
       type: vile.MAIN,
