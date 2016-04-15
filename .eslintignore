@@ -1,5 +1,7 @@
 node_modules/**
+bower_components/**
 lib/**
 .build/**
-.test/**
 coverage/**
+vendor/**
+tmp/**
