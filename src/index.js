@@ -15,27 +15,27 @@ let rubycritic = (paths) =>
     .spawn("rubycritic", {
       args: ["-f", "json"].concat(paths)
     })
-		// HACK
+    // HACK
     .then((stdout) => stdout ?
-			JSON.parse(santize_invalid_json_output(stdout)) :
-				{ analysed_modules: [] })
+      JSON.parse(santize_invalid_json_output(stdout)) :
+        { analysed_modules: [] })
 
 let smell_type = (smell) =>
-	_.get(smell, "type", "").toLowerCase()
+  _.get(smell, "type", "").toLowerCase()
 
 // TODO: split up this method
 let vile_issues = (issue, config) => {
   if (!config.rating) config.rating = DEFAULT_RATING_LIMIT
-	let smells = _.get(issue, "smells", [])
+  let smells = _.get(issue, "smells", [])
   let issues = _.map(smells, (smell) => {
-		if (smell_type(smell) == "duplicatecode") {
-			let files = _.map(smell.locations, (loc) => loc.path)
-			return vile.issue({
-				type: vile.DUPE,
-				path: issue.path,
-				title: smell.context,
-				message: smell.message,
-				signature: `rubycritic::${smell.type}::${files.join(",")}`,
+    if (smell_type(smell) == "duplicatecode") {
+      let files = _.map(smell.locations, (loc) => loc.path)
+      return vile.issue({
+        type: vile.DUPE,
+        path: issue.path,
+        title: smell.context,
+        message: smell.message,
+        signature: `rubycritic::${smell.type}::${files.join(",")}`,
         duplicate: {
           locations: _.map(smell.locations, (loc) => {
             return {
@@ -44,21 +44,21 @@ let vile_issues = (issue, config) => {
             }
           })
         }
-			})
-		} else {
-			// HACK: just use first location for now for MAIN issues
-			// TODO: parse non dupe smells more intelligently
-			let location = _.first(smell.locations)
-			return vile.issue({
-				type: vile.MAIN,
-				path: issue.path,
-				title: smell.context,
-				message: smell.message,
-				signature: `rubycritic::${smell.type}::${smell.context}`,
-				where: { start: { line: location.line } }
-			})
-		}
-	})
+      })
+    } else {
+      // HACK: just use first location for now for MAIN issues
+      // TODO: parse non dupe smells more intelligently
+      let location = _.first(smell.locations)
+      return vile.issue({
+        type: vile.MAIN,
+        path: issue.path,
+        title: smell.context,
+        message: smell.message,
+        signature: `rubycritic::${smell.type}::${smell.context}`,
+        where: { start: { line: location.line } }
+      })
+    }
+  })
 
   if (_.has(issue, "churn")) {
     issues.push(vile.issue({
@@ -99,11 +99,11 @@ let punish = (plugin_data) => {
 
   return rubycritic(paths)
     .then((cli_json) => {
-			let files = _.get(cli_json, "analysed_modules", [])
-			return _.flatten(files.map((issue) =>
-				vile_issues(issue, config)
-			))
-		})
+      let files = _.get(cli_json, "analysed_modules", [])
+      return _.flatten(files.map((issue) =>
+        vile_issues(issue, config)
+      ))
+    })
 }
 
 module.exports = {
