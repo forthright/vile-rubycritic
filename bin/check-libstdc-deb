@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -x
+
 STDC_REPO=ppa:ubuntu-toolchain-r/test
 STDC_LIB=libstdc++-4.9-dev
 ORIGIN_CACHE_DIR=/var/cache/apt/archives
@@ -9,7 +11,7 @@ sudo rm -rf $ORIGIN_CACHE_DIR
 sudo ln -s $CACHE_DIR $ORIGIN_CACHE_DIR
 mkdir -p $CACHE_DIR/partial
 
-ls $CACHE_DIR | grep $STDC_LIB
+(ls $CACHE_DIR | grep $STDC_LIB) && dpkg -l $STDC_LIB
 
 if [ $? -eq 1 ];
 then
@@ -17,5 +19,5 @@ then
   sudo apt-get update -y &&
   sudo apt-get install $STDC_LIB -y
 else
-  sudo dpkg -i $CACHE_DIR/*.deb -y
+  sudo apt-get install $STDC_LIB -y
 fi
