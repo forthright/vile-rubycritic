@@ -15,7 +15,7 @@ update_and_install () {
   install
 }
 
-dpkg -s $STDC_LIB | grep i "ok installed"
+dpkg -s $STDC_LIB | grep -i "ok installed"
 
 if [ $? -eq 1 ];
 then
