@@ -1,8 +1,20 @@
 #!/usr/bin/env sh
 
-if [ $(apt-cache pkgnames | grep -c "libstdc++-4.9-dev") -eq 0 ];
+set -x
+set -e
+
+STDC_REPO=ppa:ubuntu-toolchain-r/test
+STDC_LIB=libstdc++-4.9-dev
+
+sudo ls /var/cache/apt/archives
+echo ""
+sudo rm -rf /var/cache/apt/archives &&
+sudo ln -s ~/.apt-cache /var/cache/apt/archives &&
+mkdir -p ~/.apt-cache/partial
+
+if [ $(apt-cache pkgnames | grep -c $STDC_LIB) -eq 0 ];
 then
-  sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y &&
+  sudo add-apt-repository $STDC_REPO -y &&
   sudo apt-get update -y &&
-  sudo apt-get install libstdc++-4.9-dev -y
+  sudo apt-get install $STDC_LIB -y
 fi

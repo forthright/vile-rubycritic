@@ -2,7 +2,14 @@ machine:
   node:
     version: 5.11.0
 
+checkout:
+  post:
+    - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+    - git fetch origin $CIRCLE_BRANCH
+
 dependencies:
+  cache_directories:
+    - ~/.aptcache
   pre:
     - sh bin/check-libstdc-deb
   post:
