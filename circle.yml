@@ -8,8 +8,6 @@ checkout:
     - git fetch origin $CIRCLE_BRANCH
 
 dependencies:
-  cache_directories:
-    - ~/.aptcache
   pre:
     - sh bin/check-libstdc-deb
   post:
