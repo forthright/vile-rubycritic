@@ -4,16 +4,20 @@ set -x
 
 STDC_REPO=ppa:ubuntu-toolchain-r/test
 STDC_LIB=libstdc++-4.9-dev
+ORIGIN_CACHE_DIR=/var/cache/apt/archives
+CACHE_DIR=~/.apt-cache
 
-sudo ls /var/cache/apt/archives
-echo ""
-sudo rm -rf /var/cache/apt/archives &&
-sudo ln -s ~/.apt-cache /var/cache/apt/archives &&
-mkdir -p ~/.apt-cache/partial
+sudo ls $ORIGIN_CACHE_DIR
+mkdir $ORIGIN_CACHE_DIR
+sudo rm -rf $ORIGIN_CACHE_DIR
+sudo ln -s $CACHE_DIR $ORIGIN_CACHE_DIR
+mkdir -p $CACHE_DIR/partial
 
-if [ $(apt-cache pkgnames | grep -c $STDC_LIB) -eq 0 ];
+if [ $(dpkg -l $STDC_LIB) -eq 0 ];
 then
   sudo add-apt-repository $STDC_REPO -y &&
   sudo apt-get update -y &&
   sudo apt-get install $STDC_LIB -y
+else
+  sudo dpkg -i $CACHE_DIR/*.deb -y
 fi
