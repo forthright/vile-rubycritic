@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
-if [ $(dpkg-query -W -f="${Status}" libstdc++-4.9-dev 2>/dev/null | grep -c "ok installed") ];
+
+dpkg-query -W -f="${Status}" libstdc++-4.9-dev
+
+if [ $(dpkg-query -W -f="${Status}" libstdc++-4.9-dev 2>/dev/null | grep -c "ok installed") -eq 0 ];
 then
   sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y &&
   sudo apt-get update -y &&
