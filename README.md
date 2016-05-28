@@ -1,6 +1,6 @@
 # vile-rubycritic [![Circle CI](https://circleci.com/gh/forthright/vile-rubycritic.svg?style=svg&circle-token=61a8841f037b8768d87856aef807feb441557a58)](https://circleci.com/gh/forthright/vile-rubycritic)
 
-[![score-badge](https://vile.io/brentlintner/vile-rubycritic/badges/score?token=kEBof4SJ2tpGJXJ86jgx)](https://vile.io/brentlintner/vile-rubycritic) [![security-badge](https://vile.io/brentlintner/vile-rubycritic/badges/security?token=kEBof4SJ2tpGJXJ86jgx)](https://vile.io/brentlintner/vile-rubycritic) [![coverage-badge](https://vile.io/brentlintner/vile-rubycritic/badges/coverage?token=kEBof4SJ2tpGJXJ86jgx)](https://vile.io/brentlintner/vile-rubycritic) [![dependency-badge](https://vile.io/brentlintner/vile-rubycritic/badges/dependency?token=kEBof4SJ2tpGJXJ86jgx)](https://vile.io/brentlintner/vile-rubycritic)
+[![score-badge](https://vile.io/brentlintner/vile-rubycritic/badges/score?token=uFywUmzZfbg6UboLzn6R)](https://vile.io/brentlintner/vile-rubycritic) [![security-badge](https://vile.io/brentlintner/vile-rubycritic/badges/security?token=uFywUmzZfbg6UboLzn6R)](https://vile.io/brentlintner/vile-rubycritic) [![coverage-badge](https://vile.io/brentlintner/vile-rubycritic/badges/coverage?token=uFywUmzZfbg6UboLzn6R)](https://vile.io/brentlintner/vile-rubycritic) [![dependency-badge](https://vile.io/brentlintner/vile-rubycritic/badges/dependency?token=uFywUmzZfbg6UboLzn6R)](https://vile.io/brentlintner/vile-rubycritic)
 
 A [vile](https://vile.io) plugin for [rubycritic](https://github.com/whitesmith/rubycritic).
 
