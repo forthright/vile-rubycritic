@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+require("shelljs/global")
+
+exec(
+  "babel -d lib -m common src",
+  function(code, stdout, stderr) {
+    if (code !== 0) exit(code)
+  })
+

@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+require("shelljs/global")
+
+exec(
+  "npm run istanbul -- " +
+    "check-coverage coverage/coverage.json " +
+      "--statements 100 " +
+      "--functions 100 " +
+      "--branches 100 " +
+      "--lines 100",
+  function (code) {
+    if (code !== 0) exit(code)
+  })
