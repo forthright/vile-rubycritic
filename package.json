@@ -8,12 +8,16 @@
     "lib"
   ],
   "scripts": {
-    "compile": "babel -d lib -m common src",
-    "compile-dev": "coffee -cbo .test test",
-    "dev": "bin/dev",
+    "babel": "babel",
+    "coffee": "coffee",
+    "compile": "node bin/compile",
+    "compile-dev": "node bin/compile-dev",
+    "dev": "sh bin/dev",
+    "istanbul": "istanbul",
     "ncu": "ncu -a",
-    "test": "bin/test",
-    "test-cov": "bin/test-cov",
+    "lint-cov": "node bin/lint-cov",
+    "test": "node bin/test",
+    "test-cov": "node bin/test-cov",
     "vile": "vile -cspid --nodecorations"
   },
   "keywords": [
