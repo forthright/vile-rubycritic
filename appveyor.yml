@@ -1,0 +1,71 @@
+version: "#{build}"
+
+os: Visual Studio 2015
+
+cache:
+  - node_modules
+
+environment:
+  matrix:
+    - nodejs_version: 0.12
+      npm_version: 2.x.x
+
+    - nodejs_version: 0.12
+      npm_version: 3.x.x
+
+    - nodejs_version: 4
+      npm_version: 2.x.x
+
+    - nodejs_version: 4
+      npm_version: 3.x.x
+
+    - nodejs_version: 5
+      npm_version: 2.x.x
+
+    - nodejs_version: 5
+      npm_version: 3.x.x
+
+platform:
+  - x86
+  - x64
+
+#matrix:
+#  fast_finish: true
+
+init:
+  - git config --global core.autocrlf input
+
+branches:
+  only:
+    - master
+
+skip_tags: true
+
+clone_depth: 25
+
+build: off
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - ps: npm install -g npm@$env:npm_version
+  - ver && node --version && npm --version
+  - npm install
+
+test_script:
+  - npm run compile
+  - npm run compile-dev
+  - npm run test-cov
+
+notifications:
+  - provider: Slack
+    incoming_webhook: https://hooks.slack.com/services/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
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: true
+
+  - provider: Email
+    to:
+      - brent.lintner@gmail.com
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: true
