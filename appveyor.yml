@@ -25,6 +25,12 @@ environment:
     - nodejs_version: 5
       npm_version: 3.x.x
 
+    - nodejs_version: 6
+      npm_version: 2.x.x
+
+    - nodejs_version: 6
+      npm_version: 3.x.x
+
 platform:
   - x86
   - x64
