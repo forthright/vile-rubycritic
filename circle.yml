@@ -8,8 +8,6 @@ checkout:
     - git fetch origin $CIRCLE_BRANCH
 
 dependencies:
-  pre:
-    - sh bin/check-libstdc-deb
   post:
     - npm run compile
     - npm run compile-dev
