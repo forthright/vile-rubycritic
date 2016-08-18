@@ -1,24 +1,34 @@
 let _ = require("lodash")
+let fs = require("fs")
+let Bluebird = require("bluebird")
 let vile = require("@forthright/vile")
 
-// TODO: log this as a warning if matched
-const BEFORE_JSON = /^[^\{]*/gi
-const AFTER_JSON = /[^\}]*$/gi
+const RC_REPORT = "./tmp/rubycritic/report.json"
+const RC_BIN = "rubycritic"
+const RC_BASE_ARGS = [ "-f", "json" ]
 const DEFAULT_RATING_LIMIT = "A"
 
-let santize_invalid_json_output = (stdout) =>
-  stdout.replace(BEFORE_JSON, "")
-        .replace(AFTER_JSON, "")
+Bluebird.promisifyAll(fs)
+
+let parse_rc_json = (stringified) =>
+  _.isEmpty(stringified) ?
+    { analysed_modules: [] } :
+    JSON.parse(stringified)
+
+let remove_report = () =>
+  fs.unlinkAsync(RC_REPORT)
+
+let read_report = () =>
+  fs.readFileAsync(RC_REPORT)
+    .then((data) =>
+      remove_report().then(() =>
+        parse_rc_json(data)
+      ))
 
 let rubycritic = (paths) =>
   vile
-    .spawn("rubycritic", {
-      args: ["-f", "json"].concat(paths)
-    })
-    // HACK
-    .then((stdout) => stdout ?
-      JSON.parse(santize_invalid_json_output(stdout)) :
-        { analysed_modules: [] })
+    .spawn(RC_BIN, { args: RC_BASE_ARGS.concat(paths) })
+    .then(read_report)
 
 let smell_type = (smell) =>
   _.get(smell, "type", "").toLowerCase()
@@ -92,18 +102,20 @@ let vile_issues = (issue, config) => {
   return issues
 }
 
+let rc_issues_by_file = (cli_json) =>
+  _.get(cli_json, "analysed_modules", [])
+
 let punish = (plugin_data) => {
   let config = _.get(plugin_data, "config", {})
   let allow = _.get(plugin_data, "allow", [])
   let paths = _.isEmpty(allow) ? ["."] : allow
 
   return rubycritic(paths)
-    .then((cli_json) => {
-      let files = _.get(cli_json, "analysed_modules", [])
-      return _.flatten(files.map((issue) =>
+    .then(rc_issues_by_file)
+    .then((files) =>
+      _.flatten(files.map((issue) =>
         vile_issues(issue, config)
-      ))
-    })
+      )))
 }
 
 module.exports = {

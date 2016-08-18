@@ -1,3 +1,4 @@
+fs = require "fs"
 mimus = require "mimus"
 rubycritic = mimus.require "./../lib", __dirname, []
 chai = require "./helpers/sinon_chai"
@@ -9,6 +10,8 @@ expect = chai.expect
 # TODO: don't use setTimeout everywhere (for proper exception throwing)
 
 # TODO: write system level test for rubycritic bad json output
+
+RC_REPORT = "./tmp/rubycritic/report.json"
 
 describe "rubycritic", ->
   afterEach mimus.reset
@@ -24,8 +27,8 @@ describe "rubycritic", ->
         .should.eventually.eql util.issues
 
     it "handles an empty response", ->
-      vile.spawn.reset()
-      vile.spawn.returns new Promise (resolve) -> resolve ""
+      fs.readFileAsync.reset()
+      fs.readFileAsync.returns new Promise (resolve) -> resolve ""
 
       rubycritic
         .punish {}
@@ -39,6 +42,27 @@ describe "rubycritic", ->
             vile.spawn.should.have.been
               .calledWith "rubycritic", args: [ "-f", "json", "." ]
             done()
+      return
+
+    it "reads the report file", (done) ->
+      rubycritic
+        .punish {}
+        .should.be.fulfilled.notify ->
+          setTimeout ->
+            fs.readFileAsync.should.have.been
+              .calledWith RC_REPORT
+            done()
+      return
+
+    it "removes the report file", (done) ->
+      rubycritic
+        .punish {}
+        .should.be.fulfilled.notify ->
+          setTimeout ->
+            fs.unlinkAsync.should.have.been
+              .calledWith RC_REPORT
+            done()
+      return
 
     describe "with allow set", ->
       it "passes the allow list to the rubycritic cli", (done) ->
@@ -54,6 +78,7 @@ describe "rubycritic", ->
                               "b"
                             ]
               done()
+        return
 
     describe "with ignore set", ->
       it "passes the allow list to the rubycritic cli", (done) ->
@@ -69,3 +94,4 @@ describe "rubycritic", ->
                               "b"
                             ]
               done()
+        return

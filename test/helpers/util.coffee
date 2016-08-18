@@ -1,9 +1,17 @@
-Promise = require "bluebird"
+mimus = require "mimus"
+fs = require "fs"
+Bluebird = require "bluebird"
 rubycritic_json = require "./../fixtures/rubycritic-json"
 
 setup = (vile) ->
-  vile.spawn.returns new Promise (resolve) ->
-    resolve(JSON.stringify rubycritic_json)
+  mimus.stub(fs, "readFileAsync").returns(
+    new Bluebird((resolve, reject) ->
+      resolve(JSON.stringify(rubycritic_json))))
+
+  mimus.stub(fs, "unlinkAsync").returns(
+    new Bluebird((resolve, reject) -> resolve()))
+
+  vile.spawn.returns new Bluebird (resolve) -> resolve()
 
 issues = [
   {
