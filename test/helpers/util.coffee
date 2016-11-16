@@ -11,7 +11,11 @@ setup = (vile) ->
   mimus.stub(fs, "unlinkAsync").returns(
     new Bluebird((resolve, reject) -> resolve()))
 
-  vile.spawn.returns new Bluebird (resolve) -> resolve()
+  vile.spawn.returns new Bluebird (resolve) -> resolve({
+    code: 0
+    stdout: ""
+    stderr: ""
+  })
 
 issues = [
   {
