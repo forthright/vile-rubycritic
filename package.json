@@ -19,7 +19,8 @@
     "lint-cov": "node bin/lint-cov",
     "test": "node bin/test",
     "test-cov": "node bin/test-cov",
-    "vile": "vile p -usi --nodecorations",
+    "tsc": "tsc",
+    "vile": "vile p -usi -x src.ts:lib.js,test.coffee:.test.js -n",
     "release-it": "release-it"
   },
   "keywords": [
@@ -44,13 +45,13 @@
     "@forthright/vile-coverage": ">=0.2.14",
     "@forthright/vile-depcheck": ">=0.1.12",
     "@forthright/vile-eclint": ">=0.1.10",
-    "@forthright/vile-eslint": ">=0.1.13",
     "@forthright/vile-git": "^0.5.1",
     "@forthright/vile-language": ">=0.1.12",
     "@forthright/vile-ncu": ">=0.2.1",
     "@forthright/vile-newline": ">=0.1.12",
     "@forthright/vile-nsp": ">=0.2.13",
     "@forthright/vile-stat": "0.0.14",
+    "@forthright/vile-tslint": "^0.2.19",
     "@forthright/vile-whitespace": ">=0.1.11",
     "babel-cli": "^6.22.2",
     "babel-preset-es2015": "^6.22.0",
@@ -64,6 +65,7 @@
     "release-it": "^2.5.4",
     "shelljs": "^0.7.6",
     "sinon": "^1.17.7",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "typescript": "^2.1.6"
   }
 }

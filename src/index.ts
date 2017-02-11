@@ -1,45 +1,56 @@
-let _ = require("lodash")
-let fs = require("fs")
-let Bluebird = require("bluebird")
-let vile = require("@forthright/vile")
+import _  = require("lodash")
+import fs = require("fs")
+import Bluebird = require("bluebird")
+import vile = require("@forthright/vile")
 
 const RC_REPORT = "./tmp/rubycritic/report.json"
 const RC_BIN = "rubycritic"
-const RC_BASE_ARGS = [ "-f", "json" ]
+const RC_BASE_ARGS : string[] = [ "-f", "json" ]
 const DEFAULT_RATING_LIMIT = "A"
 
 Bluebird.promisifyAll(fs)
 
-let parse_rc_json = (stringified) =>
+const parse_rc_json = (
+  stringified : string
+) : rubycritic.JSON  =>
   _.isEmpty(stringified) ?
     { analysed_modules: [] } :
     JSON.parse(stringified)
 
-let remove_report = () =>
-  fs.unlinkAsync(RC_REPORT)
+const remove_report = () : Bluebird<void> =>
+  (<any>fs).unlinkAsync(RC_REPORT)
 
-let read_report = () =>
-  fs.readFileAsync(RC_REPORT)
-    .then((data) =>
+const read_report = () : Bluebird<rubycritic.JSON> =>
+  (<any>fs).readFileAsync(RC_REPORT)
+    .then((data : string) =>
       remove_report().then(() =>
         parse_rc_json(data)
       ))
 
-let rubycritic = (paths) =>
+const rubycritic = (
+  paths : string[]
+) : Bluebird<rubycritic.JSON> =>
   vile
     .spawn(RC_BIN, { args: RC_BASE_ARGS.concat(paths) })
     .then(read_report)
 
-let smell_type = (smell) =>
+const smell_type = (smell : rubycritic.Smell) =>
   _.get(smell, "type", "").toLowerCase()
 
 // TODO: split up this method
-let vile_issues = (issue, config) => {
+const vile_issues = (
+  issue : rubycritic.Issue,
+  config : rubycritic.Config
+) => {
   if (!config.rating) config.rating = DEFAULT_RATING_LIMIT
-  let smells = _.get(issue, "smells", [])
-  let issues = _.map(smells, (smell) => {
+  let smells : rubycritic.Smell[] = _.get(issue, "smells", [])
+  let issues = _.map(smells, (smell : rubycritic.Smell) => {
     if (smell_type(smell) == "duplicatecode") {
-      let files = _.map(smell.locations, (loc) => loc.path)
+
+      let files : string[] = _.map(
+        smell.locations,
+        (loc : rubycritic.Loc) => loc.path)
+
       return vile.issue({
         type: vile.DUPE,
         path: issue.path,
@@ -47,7 +58,7 @@ let vile_issues = (issue, config) => {
         message: smell.message,
         signature: `rubycritic::${smell.type}::${files.join(",")}`,
         duplicate: {
-          locations: _.map(smell.locations, (loc) => {
+          locations: _.map(smell.locations, (loc : rubycritic.Loc) => {
             return {
               path: loc.path,
               where: { start: { line: loc.line } }
@@ -102,18 +113,22 @@ let vile_issues = (issue, config) => {
   return issues
 }
 
-let rc_issues_by_file = (cli_json) =>
+const rc_issues_by_file = (
+  cli_json : rubycritic.JSON
+) : rubycritic.IssuesByFile =>
   _.get(cli_json, "analysed_modules", [])
 
-let punish = (plugin_data) => {
+const punish = (
+  plugin_data : vile.PluginConfig
+) : Bluebird<vile.IssueList> => {
   let config = _.get(plugin_data, "config", {})
-  let allow = _.get(plugin_data, "allow", [])
-  let paths = _.isEmpty(allow) ? ["."] : allow
+  let allow : vile.AllowList = _.get(plugin_data, "allow", [])
+  let paths : string[] = _.isEmpty(allow) ? ["."] : allow
 
   return rubycritic(paths)
     .then(rc_issues_by_file)
-    .then((files) =>
-      _.flatten(files.map((issue) =>
+    .then((files : rubycritic.IssuesByFile) =>
+      _.flatten(files.map((issue : rubycritic.Issue) =>
         vile_issues(issue, config)
       )))
 }

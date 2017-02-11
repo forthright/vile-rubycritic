@@ -9,11 +9,11 @@ checkout:
 
 dependencies:
   post:
-    - npm run compile
-    - npm run compile-dev
+    - npm run -s compile
+    - npm run -s compile-dev
 
 test:
   override:
-    - npm run test-cov
+    - npm run -s test-cov
   post:
-    - npm run vile
+    - npm run -s vile

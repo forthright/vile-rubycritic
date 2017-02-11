@@ -2,8 +2,14 @@
 require("shelljs/global")
 
 exec(
-  "babel -d lib -m common src",
+  "npm run tsc",
   function(code, stdout, stderr) {
     if (code !== 0) exit(code)
+
+    exec(
+      "npm run babel -- -d lib -m common .build",
+      function(code, stdout, stderr) {
+        if (code !== 0) exit(code)
+      })
   })
 
