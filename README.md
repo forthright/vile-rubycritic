@@ -67,12 +67,13 @@ of details and generates:
 
 ## Architecture
 
-This project is currently written in JavaScript. RubyCritic provides
-a JSON CLI output that is currently used until a more ideal
-IPC option is implemented.
+This project is currently written in `~ES6` style `TypeScript`.
+
+RubyCritic provides a JSON CLI output that is currently used
+until a more ideal IPC option is implemented.
 
 - `bin` houses any shell based scripts
-- `src` is es6+ syntax compiled with [babel](https://babeljs.io)
+- `src` is es6+ typescript compiled with `tsc` and [babel](https://babeljs.io)
 - `lib` generated js library
 
 ## Hacking
