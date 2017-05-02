@@ -15,7 +15,7 @@
     "target": "ES6",
     "typeRoots": [
       "node_modules/@types",
-      "node_modules/@forthright/vile/src/@types",
+      "node_modules/vile/src/@types",
       "src/@types"
     ]
   },

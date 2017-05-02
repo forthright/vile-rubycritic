@@ -1,7 +1,7 @@
 import _  = require("lodash")
 import fs = require("fs")
 import Bluebird = require("bluebird")
-import vile = require("@forthright/vile")
+import vile = require("vile")
 
 const RC_REPORT = "./tmp/rubycritic/report.json"
 const RC_BIN = "rubycritic"

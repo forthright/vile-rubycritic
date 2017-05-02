@@ -20,8 +20,8 @@ platform:
   - x86
   - x64
 
-#matrix:
-#  fast_finish: true
+matrix:
+  fast_finish: true
 
 init:
   - git config --global core.autocrlf input
@@ -46,17 +46,3 @@ test_script:
   - npm run compile
   - npm run compile-dev
   - npm run test-cov
-
-notifications:
-  - provider: Slack
-    incoming_webhook: https://hooks.slack.com/services/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
-    on_build_success: false
-    on_build_failure: true
-    on_build_status_changed: true
-
-  - provider: Email
-    to:
-      - brent.lintner@gmail.com
-    on_build_success: false
-    on_build_failure: true
-    on_build_status_changed: true
