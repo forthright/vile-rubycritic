@@ -30,7 +30,7 @@
     "test": "node bin/test",
     "test-cov": "node bin/test-cov",
     "tsc": "tsc",
-    "vile": "vile p -usi -x src.ts:lib.js,test.coffee:.test.js -n",
+    "vile": "vile p -u -x src.ts:lib.js,test.coffee:.test.js -n",
     "release-it": "release-it"
   },
   "keywords": [
@@ -46,7 +46,7 @@
     "lodash": "^4.17.4"
   },
   "peerDependencies": {
-    "vile": ">=0.13.0"
+    "vile": ">=0.15.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -57,23 +57,23 @@
     "istanbul": "^0.4.5",
     "mimus": "^0.2.5",
     "mocha": "^3.2.0",
-    "npm-check-updates": ">=2.10.5",
+    "npm-check-updates": "^2.10.5",
     "release-it": "^2.7.1",
     "shelljs": "^0.7.7",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.9.0",
     "typescript": "^2.2.2",
-    "vile": ">=0.14.0",
-    "vile-coffeelint": ">=0.1.14",
-    "vile-comment": ">=0.1.17",
-    "vile-coverage": ">=0.2.14",
-    "vile-depcheck": ">=0.1.12",
-    "vile-eclint": ">=0.1.13",
-    "vile-git": ">=0.5.1",
-    "vile-language": ">=0.1.12",
-    "vile-ncu": ">=0.2.1",
-    "vile-nsp": ">=0.2.13",
-    "vile-stat": ">=0.0.14",
-    "vile-tslint": ">=0.2.19"
+    "vile": "^0.15.0",
+    "vile-coffeelint": "^0.1.14",
+    "vile-comment": "^0.1.17",
+    "vile-coverage": "^0.2.14",
+    "vile-depcheck": "^0.1.12",
+    "vile-eclint": "^0.1.13",
+    "vile-git": "^0.5.1",
+    "vile-language": "^0.1.12",
+    "vile-ncu": "^0.2.1",
+    "vile-nsp": "^0.2.13",
+    "vile-stat": "^0.0.14",
+    "vile-tslint": "^0.2.19"
   }
 }
