@@ -63,7 +63,7 @@
     "sinon": "^2.3.2",
     "sinon-chai": "^2.10.0",
     "typescript": "^2.3.3",
-    "vile": "^0.15.0",
+    "vile": "^0.16.0",
     "vile-coffeelint": "^0.1.16",
     "vile-comment": "^0.1.18",
     "vile-coverage": "^0.2.15",
