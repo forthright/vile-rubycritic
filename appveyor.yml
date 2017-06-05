@@ -8,16 +8,10 @@ cache:
 environment:
   matrix:
     - nodejs_version: 4
-      npm_version: 3.x.x
-    - nodejs_version: 4
-      npm_version: 4.x.x
     - nodejs_version: 6
-      npm_version: 3.x.x
-    - nodejs_version: 6
-      npm_version: 4.x.x
+    - nodejs_version: 8
 
 platform:
-  - x86
   - x64
 
 matrix:
@@ -38,7 +32,6 @@ build: off
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - ps: npm install -g npm@$env:npm_version
   - ver && node --version && npm --version
   - npm install
 
