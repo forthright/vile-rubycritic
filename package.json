@@ -75,6 +75,7 @@
     "vile-ncu": "^0.2.4",
     "vile-nsp": "^0.2.14",
     "vile-stat": "^0.1.0",
+    "vile-synt": "^0.1.2",
     "vile-tslint": "^0.3.3"
   }
 }

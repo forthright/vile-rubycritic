@@ -19,6 +19,9 @@ vile:
     - vendor
     - "*.yml"
 
+synt:
+  ignore: lib
+
 depcheck:
   config:
     ignore_dev_deps: false
