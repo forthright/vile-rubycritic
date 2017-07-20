@@ -105,13 +105,13 @@ By participating in this project you agree to our [Code of Conduct](CODE_OF_COND
 
 ## Architecture
 
-This project is currently written in `~ES6` style `TypeScript`.
+This project is currently written in `TypeScript`.
 
 RubyCritic provides a JSON CLI output that is currently used
 until a more ideal IPC option is implemented.
 
 - `bin` houses any shell based scripts
-- `src` is es6+ typescript compiled with `tsc` and [babel](https://babeljs.io)
+- `src` typescript src
 - `lib` generated js library
 
 ## Hacking

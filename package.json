@@ -19,9 +19,8 @@
     "url": "https://github.com/forthright/vile-rubycritic.git"
   },
   "scripts": {
-    "babel": "babel",
     "coffee": "coffee",
-    "compile": "node bin/compile",
+    "compile": "tsc",
     "compile-dev": "node bin/compile-dev",
     "dev": "sh bin/dev",
     "istanbul": "istanbul",
@@ -51,8 +50,6 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.7",
     "@types/lodash": "^4.14.66",
-    "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.0.0",
     "coffee-script": "^1.12.6",

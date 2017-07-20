@@ -8,11 +8,11 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "outDir": ".build",
+    "outDir": "lib",
     "removeComments": true,
     "rootDir": "src",
     "skipLibCheck": true,
-    "target": "ES6",
+    "target": "ES5",
     "typeRoots": [
       "node_modules/@types",
       "node_modules/vile/src/@types",
