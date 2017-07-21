@@ -1,13 +1,12 @@
 # vile-rubycritic [![Circle CI](https://circleci.com/gh/forthright/vile-rubycritic.svg?style=shield&circle-token=61a8841f037b8768d87856aef807feb441557a58)](https://circleci.com/gh/forthright/vile-rubycritic) [![Build status](https://ci.appveyor.com/api/projects/status/lmt7hdfluqp60cw3/branch/master?svg=true)](https://ci.appveyor.com/project/brentlintner/vile-rubycritic/branch/master) [![score-badge](https://vile.io/api/v0/projects/vile-rubycritic/badges/score?token=USryyHar5xQs7cBjNUdZ)](https://vile.io/~brentlintner/vile-rubycritic) [![security-badge](https://vile.io/api/v0/projects/vile-rubycritic/badges/security?token=USryyHar5xQs7cBjNUdZ)](https://vile.io/~brentlintner/vile-rubycritic) [![coverage-badge](https://vile.io/api/v0/projects/vile-rubycritic/badges/coverage?token=USryyHar5xQs7cBjNUdZ)](https://vile.io/~brentlintner/vile-rubycritic) [![dependency-badge](https://vile.io/api/v0/projects/vile-rubycritic/badges/dependency?token=USryyHar5xQs7cBjNUdZ)](https://vile.io/~brentlintner/vile-rubycritic)
 
-A [vile](https://vile.io) plugin for [rubycritic](https://github.com/whitesmith/rubycritic).
+A [Vile](https://vile.io) plugin for linting your Ruby code, identifying
+similar methods, and calculating code churn (via [RubyCritic](https://github.com/whitesmith/rubycritic)).
 
 ## Requirements
 
-- [nodejs](http://nodejs.org)
-- [npm](http://npmjs.org)
-- [ruby](http://ruby-lang.org)
-- [rubygems](http://rubygems.org)
+- [Node.js](http://nodejs.org)
+- [Ruby](http://ruby-lang.org)
 
 ## Installation
 
@@ -18,14 +17,9 @@ Example:
     npm i -D vile vile-rubycritic
     gem install rubycritic
 
-Note: A good strategy is to use [bundler](http://bundler.io).
+Note: A good strategy is to use [Bundler](http://bundler.io).
 
 ## Config
-
-`vile.MAIN` issues are generated if the below thresholds
-are hit. `vile.CHURN` and `vile.COMP` are automatically
-created if values are provided, as `vile.io` will notify
-if you have high churn/complexity.
 
 Example:
 
@@ -38,8 +32,8 @@ rubycritic:
     rating: "A"
 ```
 
-Any source control related properites, like `churn`, will be ignored
-if not run within such a context.
+Any source control related properites like `churn` will be ignored
+if you are not using anything like Git.
 
 ## Ignoring Files
 
@@ -58,9 +52,6 @@ rubycritic:
 
 ## Vile Types Generated
 
-Since RubyCritic is awesome, it allows this plugin to generate a lot
-of details and generates:
-
 * `vile.DUPE`
 * `vile.CHURN`
 * `vile.COMP`
@@ -68,7 +59,7 @@ of details and generates:
 
 ## Versioning
 
-This project ascribes to [semantic versioning](http://semver.org).
+This project uses [Semver](http://semver.org).
 
 ## Licensing
 
@@ -95,8 +86,6 @@ Even if you are uncomfortable with code, an issue or question is welcome.
 
 ### Code Of Conduct
 
-This project ascribes to [contributor-covenant.org](http://contributor-covenant.org).
-
 By participating in this project you agree to our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ### Maintainers
@@ -114,7 +103,7 @@ until a more ideal IPC option is implemented.
 - `src` typescript src
 - `lib` generated js library
 
-## Hacking
+## Developing
 
     cd vile-rubycritic
     npm install

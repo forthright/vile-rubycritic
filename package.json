@@ -1,7 +1,7 @@
 {
   "name": "vile-rubycritic",
   "version": "0.2.3",
-  "description": "A vile plugin for rubycritic",
+  "description": "Lint your Ruby code, identify similar methods, and calculate code churn.",
   "main": "lib/index.js",
   "files": [
     "lib",
