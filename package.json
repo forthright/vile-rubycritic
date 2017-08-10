@@ -1,6 +1,6 @@
 {
   "name": "vile-rubycritic",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Lint your Ruby code, identify similar methods, and calculate code churn.",
   "main": "lib/index.js",
   "files": [
