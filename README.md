@@ -35,7 +35,7 @@ rubycritic:
 Any source control related properites like `churn` will be ignored
 if you are not using anything like Git.
 
-## Ignoring Files
+### Ignore
 
 Since `rubycritic` honours your `.reek` configuration, you should be able
 to use that to ignore files.
@@ -49,6 +49,18 @@ rubycritic:
     - app
     - lib
 ```
+
+## Gotchas
+
+If you see something like this:
+
+```sh
+error worker Error: ENOENT: no such file or directory, open './tmp/rubycritic/report.json'
+```
+
+...and you are using the [slim-lint](https://github.com/forthright/slim-lint) plugin, see [here](https://github.com/forthright/vile-slim-lint#gotchas) for some workarounds.
+
+If nothing helps, feel free to [open an issue](https://github.com/forthright/vile-rubycritic/issues)!
 
 ## Vile Types Generated
 
