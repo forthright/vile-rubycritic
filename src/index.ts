@@ -28,7 +28,7 @@ const read_report = () : Bluebird<rubycritic.JSON> =>
       ))
 
 const rubycritic = (
-  paths : string[]
+  paths : vile.AllowList
 ) : Bluebird<rubycritic.JSON> =>
   vile
     .spawn(RC_BIN, { args: RC_BASE_ARGS.concat(paths) })
@@ -123,7 +123,7 @@ const punish = (
 ) : Bluebird<vile.IssueList> => {
   let config = _.get(plugin_data, "config", {})
   let allow : vile.AllowList = _.get(plugin_data, "allow", [])
-  let paths : string[] = _.isEmpty(allow) ? ["."] : allow
+  let paths : vile.AllowList = _.isEmpty(allow) ? ["."] : allow
 
   return rubycritic(paths)
     .then(rc_issues_by_file)
